@@ -4,21 +4,22 @@ import static base.setting.Settings.*;
 
 public class Block {
 
+    public int x;
+    public int y;
+
     private byte[] partBuffer;
 
-    public Block(byte... partBuffer) {
-
-        if (partBuffer.length != (MAX_BLOCK_WIDTH * MAX_BLOCK_HEIGHT))
-            throw new RuntimeException("Part-Buffer is NOT correct length while initializing Block Object");
-
-        this.partBuffer = partBuffer;
+    public Block(int x, int y, BlockType type) {
+        this.x = x;
+        this.y = y;
+        this.partBuffer = type.partBuffer;
     }
 
 
 
     public void rotateRight() {
 
-        // to rotate something 90° to the right do:
+        // to rotate something by 90° to the right do:
         // (x, y) -> (y, -x)
 
         byte[] rotatedPartBuffer = new byte[MAX_BLOCK_WIDTH * MAX_BLOCK_HEIGHT];
@@ -36,11 +37,21 @@ public class Block {
 
 
 
-    public byte getPart(byte[] partBuffer, int x, int y) {
+    public byte getPart(int x, int y) {
         return partBuffer[x + (y * MAX_BLOCK_WIDTH)];
     }
 
-    public void setPart(byte[] partBuffer, int x, int y, byte id) {
+    public void setPart(int x, int y, byte id) {
+        partBuffer[x + (y * MAX_BLOCK_WIDTH)] = id;
+    }
+
+
+
+    public static byte getPart(byte[] partBuffer, int x, int y) {
+        return partBuffer[x + (y * MAX_BLOCK_WIDTH)];
+    }
+
+    public static void setPart(byte[] partBuffer, int x, int y, byte id) {
         partBuffer[x + (y * MAX_BLOCK_WIDTH)] = id;
     }
 
