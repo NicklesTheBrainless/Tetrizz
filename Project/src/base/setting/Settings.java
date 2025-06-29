@@ -18,8 +18,8 @@ public abstract class Settings {
     // BLOCK
     public static final int MAX_BLOCK_WIDTH = 4;
     public static final int MAX_BLOCK_HEIGHT = 4;
-    public static final int BLOCK_X_CENTER = 2;
-    public static final int BLOCK_Y_CENTER = 2;
+    public static final int BLOCK_X_CENTER = 1;
+    public static final int BLOCK_Y_CENTER = 1;
 
     // SCREEN
     public static final int SCREEN_WIDTH  = GRID_WIDTH * TILE_SIZE;
