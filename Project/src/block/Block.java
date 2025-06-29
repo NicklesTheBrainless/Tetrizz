@@ -47,11 +47,11 @@ public class Block {
 
 
 
-    public static byte getPart(byte[] partBuffer, int x, int y) {
+    static byte getPart(byte[] partBuffer, int x, int y) {
         return partBuffer[x + (y * MAX_BLOCK_WIDTH)];
     }
 
-    public static void setPart(byte[] partBuffer, int x, int y, byte id) {
+    static void setPart(byte[] partBuffer, int x, int y, byte id) {
         partBuffer[x + (y * MAX_BLOCK_WIDTH)] = id;
     }
 

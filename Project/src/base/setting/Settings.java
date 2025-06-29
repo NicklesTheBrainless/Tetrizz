@@ -8,22 +8,25 @@ public abstract class Settings {
     public static final String TITLE = "Tetrizz";
 
     // FPS
-    public static final int SETTING_MAX_FPS = 6;
+    public static final int SETTING_MAX_FPS = 1;
 
     // TILE GRID
     public static final int GRID_WIDTH = 10;
-    public static final int GRID_HEIGHT = 16;
+    public static final int GRID_HEIGHT = 21;
     public static final int TILE_SIZE = 32;
 
     // BLOCK
-    public static final int MAX_BLOCK_WIDTH = 4;
-    public static final int MAX_BLOCK_HEIGHT = 4;
-    public static final int BLOCK_X_CENTER = 1;
-    public static final int BLOCK_Y_CENTER = 1;
+    public static final int MAX_BLOCK_WIDTH = 5;
+    public static final int MAX_BLOCK_HEIGHT = 5;
+    public static final int BLOCK_X_CENTER = 2;
+    public static final int BLOCK_Y_CENTER = 2;
 
     // SCREEN
     public static final int SCREEN_WIDTH  = GRID_WIDTH * TILE_SIZE;
     public static final int SCREEN_HEIGHT = GRID_HEIGHT * TILE_SIZE;
     public static final Color BACKGROUND_COLOR = new Color(30, 32, 42);
+
+    // LOSE
+    public static final int LOSE_TILE_Y = 4;
 
 }

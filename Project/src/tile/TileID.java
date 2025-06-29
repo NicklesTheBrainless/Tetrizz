@@ -1,4 +1,4 @@
-package grid;
+package tile;
 
 import java.awt.*;
 

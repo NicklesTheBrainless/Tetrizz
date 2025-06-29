@@ -1,4 +1,4 @@
-package grid;
+package tile;
 
 import utils.GameObject;
 
@@ -6,7 +6,7 @@ import java.awt.*;
 
 import static base.setting.Settings.*;
 
-public class Grid implements GameObject {
+public class TileGrid implements GameObject {
 
     private byte[] tileBuffer = new byte[GRID_WIDTH * GRID_HEIGHT];
 
@@ -22,9 +22,12 @@ public class Grid implements GameObject {
             for (int x = 0; x < GRID_WIDTH; x++) {
 
                 byte tileID = getTile(x, y);
-                Color tileColor = TileID.getTileColor(tileID);
-                g2.setColor(tileColor);
-                g2.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+                if (tileID != 0) {
+                    Color tileColor = TileID.getTileColor(tileID);
+                    g2.setColor(tileColor);
+                    g2.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+                }
+
                 g2.setColor(Color.LIGHT_GRAY);
                 g2.drawRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
             }
