@@ -15,10 +15,10 @@ public class KeyHandler implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
-            case KeyEvent.VK_W: wJustPressed = true;
-            case KeyEvent.VK_A: aJustPressed = true;
-            case KeyEvent.VK_S: sJustPressed = true;
-            case KeyEvent.VK_D: dJustPressed = true;
+            case KeyEvent.VK_W -> wJustPressed = true;
+            case KeyEvent.VK_A -> aJustPressed = true;
+            case KeyEvent.VK_S -> sJustPressed = true;
+            case KeyEvent.VK_D -> dJustPressed = true;
         }
     }
 

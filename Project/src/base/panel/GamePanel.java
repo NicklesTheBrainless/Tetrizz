@@ -13,10 +13,13 @@ public class GamePanel extends BasePanel {
     // input listeners
     public KeyHandler keyH = new KeyHandler();
 
-    public TileGrid grid = new TileGrid();
+    public TileGrid grid = new TileGrid(this);
     public BlockController blockControl = new BlockController(this);
 
     public boolean lost = false;
+
+    int timeStep = 0;
+    public int fallSpeedup = 0;
 
     public GamePanel() {
 
@@ -39,6 +42,12 @@ public class GamePanel extends BasePanel {
         if (lost)
             return;
 
+        if ((STANDARD_STEPS_PER_FALL - fallSpeedup) > MINIMUM_STEPS_PER_FALL)
+            timeStep++;
+
+        if (timeStep >= STEPS_PER_SPEEDUP)
+            fallSpeedup++;
+
         blockControl.update(delta);
 
         // update input listeners
@@ -54,8 +63,10 @@ public class GamePanel extends BasePanel {
         if (lost)
             g2.drawString("You lost!", 0, 0);
 
+        g2.setStroke(new BasicStroke(4));
         g2.setColor(Color.RED);
         g2.drawLine(0, LOSE_TILE_Y * TILE_SIZE, SCREEN_WIDTH, LOSE_TILE_Y * TILE_SIZE);
+        g2.setStroke(new BasicStroke(1));
     }
 
 }
