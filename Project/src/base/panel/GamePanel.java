@@ -3,7 +3,6 @@ package base.panel;
 import base.listeners.KeyHandler;
 import block.BlockController;
 import tile.TileGrid;
-import tile.TileID;
 
 import java.awt.*;
 
