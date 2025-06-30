@@ -23,8 +23,8 @@ public abstract class Settings {
 
     // SPEEDUP
     public static final int STANDARD_STEPS_PER_FALL = 12;
-    public static final int MINIMUM_STEPS_PER_FALL = 3;
-    public static final int STEPS_PER_SPEEDUP = 15 * SETTING_MAX_FPS;
+    public static final int MINIMUM_STEPS_PER_FALL = 4;
+    public static final int STEPS_PER_SPEEDUP = 25 * SETTING_MAX_FPS;
 
     // SCREEN
     public static final int SCREEN_WIDTH  = GRID_WIDTH * TILE_SIZE;

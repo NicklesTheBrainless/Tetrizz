@@ -45,8 +45,11 @@ public class GamePanel extends BasePanel {
         if ((STANDARD_STEPS_PER_FALL - fallSpeedup) > MINIMUM_STEPS_PER_FALL)
             timeStep++;
 
-        if (timeStep >= STEPS_PER_SPEEDUP)
+        if (timeStep >= STEPS_PER_SPEEDUP) {
             fallSpeedup++;
+            timeStep = 0;
+        }
+
 
         blockControl.update(delta);
 

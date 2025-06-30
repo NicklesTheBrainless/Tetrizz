@@ -69,7 +69,7 @@ public class BlockController implements GameObject {
 
         fallStep++;
 
-        if (fallStep >= STANDARD_STEPS_PER_FALL)
+        if (fallStep >= (STANDARD_STEPS_PER_FALL - gp.fallSpeedup))
             fallBlock();
     }
 
