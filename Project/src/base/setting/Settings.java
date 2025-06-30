@@ -32,6 +32,6 @@ public abstract class Settings {
     public static final Color BACKGROUND_COLOR = new Color(30, 32, 42);
 
     // LOSE
-    public static final int LOSE_TILE_Y = 3;
+    public static final int LOSE_TILE_Y = 4;
 
 }

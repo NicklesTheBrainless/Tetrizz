@@ -49,8 +49,8 @@ public class TileGrid implements GameObject {
 
             boolean fullRow = checkFullRow(y);
             if (fullRow) {
-                fallRowsAbove(y);
                 clearRow(y);
+                fallRowsAbove(y - 1);
             } else {
                 y++;
             }
