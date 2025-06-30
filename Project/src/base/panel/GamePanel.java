@@ -50,7 +50,6 @@ public class GamePanel extends BasePanel {
             timeStep = 0;
         }
 
-
         blockControl.update(delta);
 
         // update input listeners
