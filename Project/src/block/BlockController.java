@@ -1,5 +1,6 @@
 package block;
 
+import base.listeners.KeyHandler;
 import base.panel.GamePanel;
 import tile.TileGrid;
 import tile.TileID;
@@ -13,12 +14,16 @@ import static base.setting.Settings.*;
 public class BlockController implements GameObject {
 
     GamePanel gp;
+    KeyHandler keyH;
     TileGrid grid;
 
     Block currentBlock;
 
+    int fallStep = 0;
+
     public BlockController(GamePanel gp) {
         this.gp = gp;
+        this.keyH = gp.keyH;
         this.grid = gp.grid;
 
         spawnBlock();
@@ -27,9 +32,12 @@ public class BlockController implements GameObject {
     @Override
     public void update(double delta) {
 
-        fallBlock();
-        System.out.println("fall heheh");
-        System.out.println(currentBlock.x + "   " + currentBlock.y);
+        partlyFallBlock();
+        
+        if (keyH.wJustPressed)
+            currentBlock.rotateRight();
+        
+        
     }
 
     @Override
@@ -55,37 +63,6 @@ public class BlockController implements GameObject {
 
 
 
-    void fallBlock() {
-
-        boolean hitGround = false;
-
-        for (int partY = 0; partY < MAX_BLOCK_HEIGHT; partY++) {
-            for (int partX = 0; partX < MAX_BLOCK_WIDTH; partX++) {
-
-                if (currentBlock.getPart(partX, partY) == 0)
-                    continue;
-
-                int checkX = currentBlock.x + partX;
-                int checkY = currentBlock.y + partY + 1;
-
-                if (checkY >= GRID_HEIGHT) {
-                    hitGround = true;
-                    break;
-                }
-
-                byte tileID = grid.getTile(checkX, checkY);
-                hitGround = (tileID != 0);
-                if (hitGround)
-                    break;
-            }
-        }
-
-        if (hitGround)
-            onGroundHit();
-        else
-            currentBlock.y++;
-    }
-
     void spawnBlock() {
 
         BlockType[] allTypes = BlockType.values();
@@ -95,7 +72,38 @@ public class BlockController implements GameObject {
 
 
 
+    void partlyFallBlock() {
+
+        if (fallStep >= STEPS_PER_FALL)
+            fallBlock();
+    }
+
+    void fallBlock() {
+
+        boolean hitsGround = checkHitsGround();
+
+        if (hitsGround)
+            onGroundHit();
+        else
+            currentBlock.y++;
+
+        fallStep = 0;
+    }
+
+
+
     void onGroundHit() {
+
+        placeDownBlock();
+
+        boolean lost = checkLost();
+        if (lost)
+            gp.lost = true;
+
+        spawnBlock();
+    }
+
+    void placeDownBlock() {
 
         for (int partY = 0; partY < MAX_BLOCK_HEIGHT; partY++) {
             for (int partX = 0; partX < MAX_BLOCK_WIDTH; partX++) {
@@ -107,23 +115,44 @@ public class BlockController implements GameObject {
                 grid.setTile(currentBlock.x + partX, currentBlock.y + partY, partID);
             }
         }
-
-        checkLost();
-        spawnBlock();
     }
 
-    void checkLost() {
 
-        boolean lost = false;
-        for (int checkX = 0; checkX < GRID_WIDTH; checkX++) {
 
-            lost = (grid.getTile(checkX, 0) != 0);
-            if (lost)
-                break;
+    boolean checkHitsGround() {
+
+        for (int partY = 0; partY < MAX_BLOCK_HEIGHT; partY++) {
+            for (int partX = 0; partX < MAX_BLOCK_WIDTH; partX++) {
+
+                if (currentBlock.getPart(partX, partY) == 0)
+                    continue;
+
+                int checkX = currentBlock.x + partX;
+                int checkY = currentBlock.y + partY + 1;
+
+                if (checkY >= GRID_HEIGHT)
+                    return true;
+
+                byte tileID = grid.getTile(checkX, checkY);
+                boolean hitGround = (tileID != 0);
+                if (hitGround)
+                    return true;
+            }
         }
 
-        if (lost)
-            gp.lost = true;
+        return false;
+    }
+
+    boolean checkLost() {
+
+        for (int checkX = 0; checkX < GRID_WIDTH; checkX++) {
+
+            boolean lost = (grid.getTile(checkX, 0) != 0);
+            if (lost)
+                return true;
+        }
+
+        return false;
     }
 
 }

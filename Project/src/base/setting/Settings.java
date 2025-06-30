@@ -8,7 +8,7 @@ public abstract class Settings {
     public static final String TITLE = "Tetrizz";
 
     // FPS
-    public static final int SETTING_MAX_FPS = 1;
+    public static final int SETTING_MAX_FPS = 8;
 
     // TILE GRID
     public static final int GRID_WIDTH = 10;
@@ -20,6 +20,7 @@ public abstract class Settings {
     public static final int MAX_BLOCK_HEIGHT = 5;
     public static final int BLOCK_X_CENTER = 2;
     public static final int BLOCK_Y_CENTER = 2;
+    public static final int STEPS_PER_FALL = 8;
 
     // SCREEN
     public static final int SCREEN_WIDTH  = GRID_WIDTH * TILE_SIZE;
