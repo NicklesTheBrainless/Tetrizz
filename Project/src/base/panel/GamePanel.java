@@ -3,6 +3,7 @@ package base.panel;
 import base.listeners.KeyHandler;
 import block.BlockController;
 import tile.TileGrid;
+import tile.TileID;
 
 import java.awt.*;
 
@@ -60,8 +61,14 @@ public class GamePanel extends BasePanel {
         grid.draw(g2);
         blockControl.draw(g2);
 
-        if (lost)
-            g2.drawString("You lost!", 0, 0);
+        if (lost) {
+            g2.setColor(new Color(20, 20, 20));
+            g2.fillRoundRect((int) (2.8 * TILE_SIZE), 4, (int) (4.6 * TILE_SIZE), (int) (1.2 * TILE_SIZE), 8, 8);
+            g2.setColor(Color.WHITE);
+            g2.setFont(new Font(Font.DIALOG, Font.BOLD, TILE_SIZE));
+            g2.drawString("You lost!", 3 * TILE_SIZE, TILE_SIZE);
+        }
+
 
         g2.setStroke(new BasicStroke(4));
         g2.setColor(Color.RED);
